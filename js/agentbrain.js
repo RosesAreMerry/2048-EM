@@ -26,6 +26,14 @@ class AgentBrain {
         }
     };
 
+    addTile(cell, value) {
+        const cells = this.grid.availableCells();
+        if (cells.find(c => c.x === cell.x && c.y === cell.y)) {
+            var tile = new Tile(cell, value);
+            this.grid.insertTile(tile);
+        }
+    }
+
     moveTile(tile, cell) {
         this.grid.cells[tile.x][tile.y] = null;
         this.grid.cells[cell.x][cell.y] = tile;
@@ -82,9 +90,6 @@ class AgentBrain {
             });
         });
         //console.log(moved);
-        if (moved) {
-            this.addRandomTile();
-        }
         return moved;
     };
 
